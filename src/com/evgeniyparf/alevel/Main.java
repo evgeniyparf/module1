@@ -1,22 +1,39 @@
 package com.evgeniyparf.alevel;
 
 public class Main {
+
+    //private int[][] chessField = new int[8][8]
+
     public static void main(String[] args) {
-        System.out.println(findDiffNum(new int[] { 1 , 3, 4, 6, 1, 3, 1, 1}));
+        int horsePosX = 3, horsePosY = 3, newPosX = 1, newPosY = 4;
+        if(checkHorseMove(horsePosX, horsePosY, newPosX, newPosY))
+            System.out.println("Horse[" + horsePosX + "][" + horsePosY + "] CAN move to [" + newPosX + "][" + newPosY + "]!");
+        else
+            System.out.println("Horse[" + horsePosX + "][" + horsePosY + "] CAN'T move to [" + newPosX + "][" + newPosY + "]!");
 
     }
 
-    public static int findDiffNum(int[] arr){
-        int count = 0;
-        top:
-        for(int i=0; i < arr.length; i++){
-            for(int y = i+1; y < arr.length; y++){
-                if(arr[i] == arr[y]){
-                    continue top;
-                }
+    public static boolean checkHorseMove(int horsePosX, int horsePosY, int newPosX, int newPosY) {
+        if(newPosY < 8 && newPosX < 8) {
+            if (newPosY - 2 == horsePosY || newPosY + 2 == horsePosY) {
+                if (newPosX + 1 == horsePosX)
+                    return true;
+                else if (newPosX - 1 == horsePosX)
+                    return true;
+                else
+                    return false;
             }
-            count++;
+            if (newPosY - 1 == horsePosY || newPosY + 1 == horsePosY) {
+                if (newPosX + 2 == horsePosX)
+                    return true;
+                else if (newPosX - 2 == horsePosX)
+                    return true;
+                else
+                    return false;
+            } else return false;
+        } else {
+            System.out.println("New positions are out of field!");
+            return false;
         }
-        return count;
     }
 }
